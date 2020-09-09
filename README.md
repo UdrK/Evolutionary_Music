@@ -21,3 +21,5 @@ For problem number two i'm going to have the user (me) evaluate and select the f
 
 For problem number three i don't have a solution at the moment, but i'm confident i'll find one as i develop the random
 generator.
+
+In order to **run** any python file in the project it's necessary to download JythonMusic from [here](https://jythonmusic.me/download/) unzip in the same folder, enter the jythonMusic folder and type "jython ../file_to_execute.py"
