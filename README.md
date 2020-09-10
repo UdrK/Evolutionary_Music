@@ -1,7 +1,7 @@
-# Genetic_Music
-This project's aim is to produce a genetic algorithm capable of composing short melodic lines.
+# Evolutionary_Music
+This project's aim is to produce an evolutionary algorithm capable of composing short melodic lines.
 
-Genetic algorithms work as follows:
+Evolutionary algorithms work as follows:
 1. Randomly generate an initial population of individuals
 
 2. 1. Evaluate fitness of each individual
@@ -11,15 +11,14 @@ Genetic algorithms work as follows:
    5. repeat
 
 In order to use this approach to produce melodic lines i have to:
-1. Understand how to randomly generate melodies
+1. Understand how to generate and play melodies
 2. Find a way to evaluate and select the "fittest" melodies
 3. Define what it means to have 2 melodies reproduce
 
-For problem number one i'm going to read the book "Making Music with Computers" by Bill Manaris and Andrew R. Brown.
+I address these issue by:
+1. Using the module [MIDIUtil](https://pypi.org/project/MIDIUtil/#:~:text=Introduction,with%20a%20minimum%20of%20fuss)
+2. Having the user (me) evaluate and select the fittest melodies. Later on i might train a neural network or other machine learning algorithm based on my scores to select melodies for me. 
+3. I'll come up with an idea once i have at least part of the project up and going 
 
-For problem number two i'm going to have the user (me) evaluate and select the fittest melodies. Later on i may train a neural network or other machine learning algorithm based on my scores to select melodies for me. 
-
-For problem number three i don't have a solution at the moment, but i'm confident i'll find one as i develop the random
-generator.
-
-In order to **run** any python file in the project it's necessary to download JythonMusic from [here](https://jythonmusic.me/download/) unzip in the same folder, enter the jythonMusic folder and type "jython ../file_to_execute.py"
+MIDIUtil lets me save a .mid file. To play it i use fluidsynth. Since i can't manage to run fluidsynth's bindings for python i've installed fluidsynth following [this guide](https://ksvi.mff.cuni.cz/~dingle/2019/prog_1/python_music.html)
+and made a .bat file which runs the command `fluidsynth FluidR3_GM.sf2 path-to-MIDIUtil-generated.mid`. The bat file is in turn run by python using `subprocess.call`
