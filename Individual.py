@@ -79,10 +79,75 @@ class Individual:
     """
     def generate(self):
 
+        notes = []
+        durations = []
+        dynamics = []
+
         for i in range(self.phrase_length):
-            print(platform.python_version())
             pitch = random.choices(self.possible_notes, self.note_genes[i])
             duration = random.choices(self.possible_durations, self.duration_genes[i])
             dynamic = random.choices(self.possible_dynamic, self.dynamic_genes[i])
 
-        # need to return something
+            notes.append(pitch[0])
+            durations.append(duration[0])
+            dynamics.append(dynamic[0])
+
+        return notes, durations, dynamics
+
+
+
+    """
+        saves genes in .txt file
+        Parameters:
+            filename: string name of the file used to save the matrixes of probabilities 
+    """
+    def save_genes(self, filename):
+
+        note_matrix_string = self.__matrix_to_string(self.note_genes)
+        duration_matrix_string = self.__matrix_to_string(self.duration_genes)
+        dynamic_matrix_string = self.__matrix_to_string(self.dynamic_genes)
+
+        with open(filename, "w") as output_file:
+            output_file.write(note_matrix_string)
+            output_file.write("\n")
+            output_file.write(duration_matrix_string)
+            output_file.write("\n")
+            output_file.write(dynamic_matrix_string)
+    """
+        reads genes saved in .txt file
+        Parameters:
+            filename: string name of the file used to save the matrixes of probabilities 
+    """
+    def read_genes(self, filename):
+        with open(filename, "r") as input_file:
+            note_matrix_string = input_file.readline()
+            duration_matrix_string = input_file.readline()
+            dynamic_matrix_string = input_file.readline()
+
+        self.note_genes = self.__string_to_matrix(note_matrix_string)
+        self.duration_genes = self.__string_to_matrix(duration_matrix_string)
+        self.dynamic_genes = self.__string_to_matrix(dynamic_matrix_string)
+
+
+    def __matrix_to_string(self, matrix):
+
+        string = "["
+        for i in range(len(matrix)):
+            string += "["
+            for j in range(len(matrix[0])):
+                string += "{},".format(matrix[i][j])
+            string += "],"
+        string += "]"
+
+        return string
+
+    def __string_to_matrix(self, string):
+        string = string[2:-5]
+        rows = string.split(',],[')
+        matrix = [[0 for m in range(len(rows[0].split(',')))] for m in range(len(rows))]
+        for i in range(len(rows)):
+            numbers = rows[i].split(',')
+            for j in range(len(numbers)):
+                matrix[i][j] = numbers[j]
+
+        return matrix

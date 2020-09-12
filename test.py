@@ -10,8 +10,7 @@ duration = [0.25,0.25,0.25,2,0.25,0.25,0.25,2]  # In beats
 tempo    = 120  # In BPM
 volume   = 100 # 0-127, as per the MIDI standard
 
-MyMIDI = MIDIFile(1) # One track, defaults to format 1 (tempo track
-                     # automatically created)
+MyMIDI = MIDIFile(1) # One track, defaults to format 1 (tempo track automatically created)
 MyMIDI.addTempo(track,time, tempo)
 
 for i in range(len(degrees)):
@@ -23,5 +22,5 @@ with open("mid-output.mid", "wb") as output_file:
 
 subprocess.call(["C:/fluidsynth-x64/FluidR3_GM/play.bat"])
 
-x = input('Program can continue after typing quit to exit fluidsynth')
+x = input('Program can continue after typing quit to exit fluidsynth ')
 print(x)
