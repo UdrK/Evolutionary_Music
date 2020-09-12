@@ -4,6 +4,7 @@ from midiutil import MIDIFile
 import pathlib
 import subprocess
 
+
 def play_generated(notes, durations, dynamics, save_file):
     track = 0
     channel = 0
@@ -21,6 +22,13 @@ def play_generated(notes, durations, dynamics, save_file):
         MyMIDI.writeFile(output_file)
 
     subprocess.call("C:/fluidsynth-x64/FluidR3_GM/play.bat {}{}".format(pathlib.Path().absolute().parent, "/outputs/{}".format(save_file)))
+
+
+def save_generated(notes, duration, save_file):
+    with open("../outputs/{}".format(save_file), "w") as output_file:
+        for i in range(len(notes)):
+            output_file.write(' {}_{} '.format(notes[i], duration[i]))
+
 
 individuals = []
 
@@ -41,6 +49,7 @@ while stop == 'y':
     for i in range(len(individuals)):
         notes, durations, dynamics = individuals[i]['individual'].generate()
         play_generated(notes, durations, dynamics, 'output_midi_{}.mid'.format(save_file))
+        save_generated(notes, durations, 'output_notes_{}.txt'.format(save_file))
         save_file += 1
         score = input('Assign a score to this composition: ')
         individuals[i]['score'] = score
@@ -53,7 +62,7 @@ while stop == 'y':
         if i < len(individuals)//2:
             new_individuals.append({
                 'individual': IndividualBuilder.from_individuals(individuals[i]['individual'], individuals[i+1]['individual']),
-                'score': None
+                'score': -1
             })
         else:
             if j < len(new_individuals):
