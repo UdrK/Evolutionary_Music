@@ -36,7 +36,7 @@ root = C5
 scale = MAJOR_SCALE
 phrase_length = 8
 
-for i in range(8):
+for i in range(4):
     ind = IndividualBuilder.from_chance(root, scale, phrase_length)
     individuals.append({
         'individual': ind,
@@ -52,7 +52,7 @@ while stop == 'y':
         save_generated(notes, durations, 'output_notes_{}.txt'.format(save_file))
         save_file += 1
         score = input('Assign a score to this composition: ')
-        individuals[i]['score'] = score
+        individuals[i]['score'] = int(score)
 
     individuals = sorted(individuals, key=lambda a: a['score'], reverse=True)
 
@@ -75,4 +75,4 @@ while stop == 'y':
 
 individuals = sorted(individuals, key=lambda a: a['score'], reverse=True)
 for i in range(len(individuals)):
-    individuals[i]['individual'].save_genes('outputs/genes_{}.txt'.format(i))
+    individuals[i]['individual'].save_genes('../outputs/genes_{}.txt'.format(i))

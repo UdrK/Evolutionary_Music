@@ -17,10 +17,10 @@ class IndividualBuilder:
     @staticmethod
     def from_chance(root, scale, phrase_length):
         ind = Individual()
-        # 3 octaves of the scale
         ind.root = root
         ind.scale = scale.copy()
         ind.phrase_length = phrase_length
+        # 3 octaves of the scale
         ind.possible_notes = [root+j+i for j in [-12, 0, 12] for i in scale]
         ind.possible_durations = [WN, DHN, HN, DQN, QN, DEN, EN, DSN, SN]
         ind.possible_dynamic = [FF, F, MF, MP, P, PP]
@@ -187,11 +187,15 @@ class Individual:
     def _sum_genes(gene_array_1, gene_array_2):
         new_gene_array = []
 
+        edge = max(max(gene_array_1), max(gene_array_2))
+        edge = edge + 0.5*edge
+
         for i in range(len(gene_array_1)):
-            if gene_array_1[i] + gene_array_2[i] >= max(max(gene_array_1), max(gene_array_2)):
-                new_gene_array.append(gene_array_1[i] + gene_array_2[i])
+            if gene_array_1[i] + gene_array_2[i] >= edge:
+                insertee = gene_array_1[i] + gene_array_2[i]
             else:
-                new_gene_array.append(min(gene_array_1[i], gene_array_2[i]))
+                insertee = min(gene_array_1[i], gene_array_2[i])
+            new_gene_array.append(insertee)
 
         total = sum(new_gene_array)
 
