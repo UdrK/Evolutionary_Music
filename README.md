@@ -59,7 +59,8 @@ because you need the sum of i3's probabilities to do it. It is needed to keep th
 
 A graphical example:
 
-![Figure_1](https://user-images.githubusercontent.com/26527575/93065078-908eaf80-f678-11ea-9012-8c3563b9f6d1.png)
+![Figure_1](https://user-images.githubusercontent.com/26527575/93075252-d43be600-f685-11ea-9bd8-3ab403ae8de7.png)
+
 
 The graph shows what probability has the first note of a generated piece to be a specific musical note.
 
