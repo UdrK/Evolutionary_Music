@@ -21,7 +21,7 @@ class IndividualBuilder:
         ind.scale = scale.copy()
         ind.phrase_length = phrase_length
         # 3 octaves of the scale
-        ind.possible_notes = [root+j+i for j in [0] for i in scale]
+        ind.possible_notes = [root+j+i for j in [-12, 0] for i in scale]
         ind.possible_durations = [WN, DHN, HN, DQN, QN, DEN, EN, DSN, SN]
 
         # initializing empty notes probabilities matrix
@@ -31,7 +31,9 @@ class IndividualBuilder:
 
             # n = len(possible_notes) random numbers such that their sum is == 1
             # generate n random numbers, divide each by their sum
-            random_probabilities = [random.randint(0, 10000) for m in range(len(ind.possible_notes))]
+            random_probabilities = [random.randint(0, 1000) for m in range(len(ind.possible_notes))]
+            random_probabilities[random.randint(0, len(random_probabilities) - 1)] = 1.7 * sum(random_probabilities)
+
             total = sum(random_probabilities)
             random_probabilities = [m/total for m in random_probabilities]
 
@@ -47,6 +49,8 @@ class IndividualBuilder:
             # n = len(possible_notes) random numbers such that their sum is == 1
             # generate n random numbers, divide each by their sum
             random_probabilities = [random.randint(0, 10000) for m in range(len(ind.possible_durations))]
+            random_probabilities[random.randint(0, len(random_probabilities) - 1)] = 1.7 * sum(random_probabilities)
+
             total = sum(random_probabilities)
             random_probabilities = [m/total for m in random_probabilities]
 
