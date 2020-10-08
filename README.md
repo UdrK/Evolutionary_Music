@@ -45,7 +45,8 @@ IndividualBuilder has 2 methods that return a new fully functional Individual:
 
 The first method randomly generates an Individual. It takes a root note, a scale, and a phrase_length. The root note and scale are needed to determine
 the pool of notes used by the individual to generate the music. The phrase_length simply says how many notes will be in the music generated. I might want
-to add random generation using perlin noise.
+to add random generation using perlin noise. To make individual make less random music at each generation, for each i-th note of the individual i pick a favorite one, which
+has a larger probability of being used.
 
 The second method takes 2 individuals and mixes their genes to produce a third. This is done by: 
 ```
